@@ -280,6 +280,13 @@ void setup() {
   pinMode(JUMP_BUTTON, INPUT_PULLUP);
   pinMode(DUCK_BUTTON, INPUT_PULLUP);
   Serial.begin(250000);
+
+/* Workaround from https://github.com/AlexIII/t-rex-duino/issues/2 */
+#ifdef LCD_SSD1306
+  Adafruit_SSD1306 display = Adafruit_SSD1306(...);
+  display.begin();
+#endif 
+
   lcd.begin();
   spalshScreen();
   lcd.setAddressingMode(LCD_IF_VIRTUAL_WIDTH(lcd.VerticalAddressingMode, lcd.HorizontalAddressingMode));
